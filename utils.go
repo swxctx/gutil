@@ -137,3 +137,13 @@ func FloatStringToInt32(s string) int32 {
 	}
 	return int32(d.Mul(decimal.New(100, 0)).IntPart())
 }
+
+/*
+	input: 12.3455
+	output: 12
+*/
+// Float32ToInt64 float32转为int64
+func Float32ToInt64(count float32) (int64, error) {
+	countStr := fmt.Sprintf("%0.0f", count)
+	return strconv.ParseInt(depositStr, 10, 64)
+}
