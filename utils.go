@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"math/big"
 	"strconv"
-
-	"github.com/shopspring/decimal"
 )
 
 /*
@@ -127,15 +125,6 @@ func RemoveElementToint32(list []int32, value int32) []int32 {
 // Int64ToString int64->string
 func Int64ToString(n int64) string {
 	return strconv.FormatInt(n, 10)
-}
-
-// FloatStringToInt32 小数转整数,返回格式：小数*100
-func FloatStringToInt32(s string) int32 {
-	d, err := decimal.NewFromString(s)
-	if err != nil {
-		return 0
-	}
-	return int32(d.Mul(decimal.New(100, 0)).IntPart())
 }
 
 /*
