@@ -134,5 +134,5 @@ func Int64ToString(n int64) string {
 // Float32ToInt64 float32转为int64
 func Float32ToInt64(count float32) (int64, error) {
 	countStr := fmt.Sprintf("%0.0f", count)
-	return strconv.ParseInt(depositStr, 10, 64)
+	return strconv.ParseInt(countStr, 10, 64)
 }
