@@ -8,3 +8,8 @@ func StringToBytes(s string) []byte {
 	bp := [3]uintptr{sp[0], sp[1], sp[1]}
 	return *(*[]byte)(unsafe.Pointer(&bp))
 }
+
+// BytesToString []byte to string
+func BytesToString(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
+}
