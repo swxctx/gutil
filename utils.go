@@ -3,7 +3,9 @@ package gutil
 import (
 	"crypto/rand"
 	"fmt"
+	"math"
 	"math/big"
+	"regexp"
 	"strconv"
 )
 
@@ -134,5 +136,45 @@ func Int64ToString(n int64) string {
 // Float32ToInt64 float32转为int64
 func Float32ToInt64(count float32) (int64, error) {
 	countStr := fmt.Sprintf("%0.0f", count)
-	return strconv.ParseInt(depositStr, 10, 64)
+	return strconv.ParseInt(countStr, 10, 64)
+}
+
+// IsStringExists 判断字符是否在切片里面
+func IsStringExists(needle string, haystack []string) bool {
+	for _, b := range haystack {
+		if b == needle {
+			return true
+		}
+	}
+	return false
+}
+
+// CheckLongitudeAndLatitude 校验经纬度
+func CheckLongitudeAndLatitude(longitude, latitude float64) bool {
+	// 校验经度范围+-(0-180),小数位不大于20位
+	longitudeStr := strconv.FormatFloat(longitude, 'f', -1, 64)
+	reg := regexp.MustCompile(`^(\-|\+)?(((\d|[1-9]\d|1[0-7]\d|0{1,3})\.\d{0,20})|(\d|[1-9]\d|1[0-7]\d|0{1,3})|180\.0{0,20}|180)$`)
+	if !reg.MatchString(longitudeStr) {
+		return false
+	}
+	// 校验纬度范围+-(0-90),小数位不大于20位
+	latitudeStr := strconv.FormatFloat(latitude, 'f', -1, 64)
+	reg = regexp.MustCompile(`^(\-|\+)?([0-8]?\d{1}\.\d{0,20}|90\.0{0,20}|[0-8]?\d{1}|90)$`)
+	if !reg.MatchString(latitudeStr) {
+		return false
+	}
+	return true
+}
+
+// EarthDistance 经纬度距离计算(返回m)
+func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
+	radius := float64(6371000)
+	rad := math.Pi / 180.0
+	lat1 = lat1 * rad
+	lng1 = lng1 * rad
+	lat2 = lat2 * rad
+	lng2 = lng2 * rad
+	theta := lng2 - lng1
+	dist := math.Acos(math.Sin(lat1)*math.Sin(lat2) + math.Cos(lat1)*math.Cos(lat2)*math.Cos(theta))
+	return dist * radius
 }
