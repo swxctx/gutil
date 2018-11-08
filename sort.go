@@ -27,7 +27,7 @@ func IntInsertionSortAsc(arr []int) []int {
 	input: [95 45 15 78 84 51 24 12]
 	output: [12 15 24 45 51 78 84 95]
 */
-func Int32InsertionSortAsc(arr []int) []int {
+func Int32InsertionSortAsc(arr []int32) []int32 {
 	for i := 1; i < len(arr); i++ {
 		// 小于前一个
 		if arr[i] < arr[i-1] {
@@ -49,7 +49,7 @@ func Int32InsertionSortAsc(arr []int) []int {
 	input: [95 45 15 78 84 51 24 12]
 	output: [12 15 24 45 51 78 84 95]
 */
-func Int64InsertionSortAsc(arr []int) []int {
+func Int64InsertionSortAsc(arr []int64) []int64 {
 	for i := 1; i < len(arr); i++ {
 		// 小于前一个
 		if arr[i] < arr[i-1] {
@@ -93,7 +93,7 @@ func IntInsertionSortDesc(arr []int) []int {
 	input: [95 45 15 78 84 51 24 12]
 	output: [95 84 78 51 45 24 15 12]
 */
-func Int32InsertionSortDesc(arr []int) []int {
+func Int32InsertionSortDesc(arr []int32) []int32 {
 	for i := 1; i < len(arr); i++ {
 		// 小于前一个
 		if arr[i] > arr[i-1] {
@@ -115,7 +115,7 @@ func Int32InsertionSortDesc(arr []int) []int {
 	input: [95 45 15 78 84 51 24 12]
 	output: [95 84 78 51 45 24 15 12]
 */
-func Int64InsertionSortDesc(arr []int) []int {
+func Int64InsertionSortDesc(arr []int64) []int64 {
 	for i := 1; i < len(arr); i++ {
 		// 小于前一个
 		if arr[i] > arr[i-1] {
@@ -130,4 +130,154 @@ func Int64InsertionSortDesc(arr []int) []int {
 		}
 	}
 	return arr
+}
+
+/*
+	IntBubbleSortAsc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func IntBubbleSortAsc(values []int) []int {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] > values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
+}
+
+/*
+	IntBubbleSortAsc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func Int32BubbleSortAsc(values []int32) []int32 {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] > values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
+}
+
+/*
+	Int64BubbleSortAsc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func Int64BubbleSortAsc(values []int64) []int64 {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] > values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
+}
+
+/*
+	IntBubbleSortDesc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func IntBubbleSortDesc(values []int) []int {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] < values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
+}
+
+/*
+	Int32BubbleSortDesc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func Int32BubbleSortDesc(values []int32) []int32 {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] < values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
+}
+
+/*
+	Int64BubbleSortDesc 冒泡排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func Int64BubbleSortDesc(values []int64) []int64 {
+	flag := true
+	vLen := len(values)
+	for i := 0; i < vLen-1; i++ {
+		// 使用flag标记，减少循环次数(当第一次已经是正序就不再进行循环了)
+		flag = true
+		for j := 0; j < vLen-i-1; j++ {
+			if values[j] < values[j+1] {
+				values[j], values[j+1] = values[j+1], values[j]
+				flag = false
+				continue
+			}
+		}
+		if flag {
+			break
+		}
+	}
+	return values
 }
