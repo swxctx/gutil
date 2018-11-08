@@ -281,3 +281,117 @@ func Int64BubbleSortDesc(values []int64) []int64 {
 	}
 	return values
 }
+
+/*
+	IntSectionSortAsc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func IntSectionSortAsc(values []int) []int {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] < values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
+
+/*
+	Int32SectionSortAsc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func Int32SectionSortAsc(values []int32) []int32 {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] < values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
+
+/*
+	Int64SectionSortAsc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [12 15 24 45 51 78 84 95]
+*/
+func Int64SectionSortAsc(values []int64) []int64 {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] < values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
+
+/*
+	IntSectionSortDesc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func IntSectionSortDesc(values []int) []int {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] > values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
+
+/*
+	Int32SectionSortDesc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func Int32SectionSortDesc(values []int32) []int32 {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] > values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
+
+/*
+	IntSectionSortDesc 选择排序
+	input: [95 45 15 78 84 51 24 12]
+	output: [95 84 78 51 45 24 15 12]
+*/
+func Int64SectionSortDesc(values []int64) []int64 {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if values[j] > values[min] {
+				min = j
+			}
+		}
+		values[i], values[min] = values[min], values[i]
+	}
+	return values
+}
