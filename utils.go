@@ -7,6 +7,8 @@ import (
 	"math/big"
 	"regexp"
 	"strconv"
+
+	"github.com/henrylee2cn/goutil/coarsetime"
 )
 
 /*
@@ -177,4 +179,16 @@ func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
 	theta := lng2 - lng1
 	dist := math.Acos(math.Sin(lat1)*math.Sin(lat2) + math.Cos(lat1)*math.Cos(lat2)*math.Cos(theta))
 	return dist * radius
+}
+
+// 生成随机字符串
+func GetRandomString(length int) string {
+	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	bytes := []byte(str)
+	result := []byte{}
+	r := rand.New(rand.NewSource(coarsetime.FloorTimeNow().UnixNano()))
+	for i := 0; i < length; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
+	}
+	return string(result)
 }
