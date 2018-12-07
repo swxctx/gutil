@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
+// Get
 func Get(path string) (resp *http.Response, bs []byte, err error) {
 	resp, err = http.Get(path)
 	if err != nil {
@@ -25,6 +27,27 @@ func Get(path string) (resp *http.Response, bs []byte, err error) {
 	return
 }
 
+// GetJSONByParams
+func GetJSONByParams(path string, params map[string]string) (resp *http.Response, data map[string]interface{}, err error) {
+	params_s := ""
+	for k, v := range params {
+		params_s += fmt.Sprintf("%s=%s&", k, QueryEscape(v))
+	}
+	params_s = params_s[:len(params_s)-1]
+	return GetJSON(path + "?" + params_s)
+}
+
+// JoinParams
+func JoinParams(path string, params map[string]string) string {
+	params_s := ""
+	for k, v := range params {
+		params_s += fmt.Sprintf("%s=%s&", k, QueryEscape(v))
+	}
+	params_s = params_s[:len(params_s)-1]
+	return path + "?" + params_s
+}
+
+// GetJSON
 func GetJSON(path string) (resp *http.Response, data map[string]interface{}, err error) {
 	resp, err = http.Get(path)
 	if err != nil {
@@ -50,6 +73,7 @@ func GetJSON(path string) (resp *http.Response, data map[string]interface{}, err
 	return
 }
 
+// Post
 func Post(path string, form url.Values) (resp *http.Response, data map[string]interface{}, err error) {
 	resp, err = http.PostForm(path, form)
 	if err != nil {
@@ -71,6 +95,7 @@ func Post(path string, form url.Values) (resp *http.Response, data map[string]in
 	return
 }
 
+// PostJSON
 func PostJSON(path string, form url.Values) (resp *http.Response, data map[string]interface{}, err error) {
 	resp, err = http.PostForm(path, form)
 	if err != nil {
@@ -91,4 +116,19 @@ func PostJSON(path string, form url.Values) (resp *http.Response, data map[strin
 		return
 	}
 	return
+}
+
+// QueryEscape
+func QueryEscape(s string) string {
+	s = url.QueryEscape(s)
+	s = strings.Replace(s, "+", "%20", -1)
+	return s
+}
+
+// QueryUnescape
+func QueryUnescape(s string) (string, error) {
+	var err error
+	s = strings.Replace(s, "%20", "+", -1)
+	s, err = url.QueryUnescape(s)
+	return s, err
 }
