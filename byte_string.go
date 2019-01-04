@@ -1,6 +1,8 @@
 package gutil
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 // StringToBytes
 func StringToBytes(s string) []byte {
