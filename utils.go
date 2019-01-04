@@ -133,15 +133,3 @@ func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
 	dist := math.Acos(math.Sin(lat1)*math.Sin(lat2) + math.Cos(lat1)*math.Cos(lat2)*math.Cos(theta))
 	return dist * radius
 }
-
-var (
-	phoneRx, _ = regexp.Compile("^[1][3456789]\\d{9}")
-)
-
-// IsValidPhone 识别手机号码是否符合正确格式
-func IsValidPhone(phone string) bool {
-	if len(phone) != 11 || (phone[0] != '1') {
-		return false
-	}
-	return phoneRx.Match([]byte(phone))
-}
