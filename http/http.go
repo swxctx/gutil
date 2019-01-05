@@ -1,6 +1,7 @@
 package xhttp
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -92,26 +93,23 @@ func Post(path string, form url.Values) (resp *http.Response, bs []byte, err err
 }
 
 // PostJSON
-func PostJSON(path string, form url.Values) (resp *http.Response, data map[string]interface{}, err error) {
-	resp, err = http.PostForm(path, form)
+func PostJSON(URL string, jsonByte []byte) ([]byte, error) {
+	req, err := http.NewRequest("POST", URL, bytes.NewBuffer(jsonByte))
 	if err != nil {
-		return
+		return nil, err
 	}
-	defer resp.Body.Close()
-	bs, err := ioutil.ReadAll(resp.Body)
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	rsp, err := client.Do(req)
 	if err != nil {
-		return
+		return nil, err
 	}
-	if resp.StatusCode != 200 {
-		err = fmt.Errorf("http post json error-> status = %d", resp.StatusCode)
-		return
-	}
-	data = map[string]interface{}{}
-	err = json.Unmarshal(bs, &data)
+	defer rsp.Body.Close()
+	b, err := ioutil.ReadAll(rsp.Body)
 	if err != nil {
-		return
+		return nil, err
 	}
-	return
+	return b, nil
 }
 
 // QueryEscape
