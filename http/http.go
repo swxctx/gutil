@@ -74,22 +74,18 @@ func GetJSON(path string) (resp *http.Response, data map[string]interface{}, err
 }
 
 // Post
-func Post(path string, form url.Values) (resp *http.Response, data map[string]interface{}, err error) {
+func Post(path string, form url.Values) (resp *http.Response, bs []byte, err error) {
 	resp, err = http.PostForm(path, form)
 	if err != nil {
 		return
 	}
 	defer resp.Body.Close()
-	bs, err := ioutil.ReadAll(resp.Body)
+	bs, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return
 	}
 	if resp.StatusCode != 200 {
 		err = fmt.Errorf("http post json error-> status = %d", resp.StatusCode)
-		return
-	}
-	bs, err = ioutil.ReadAll(resp.Body)
-	if err != nil {
 		return
 	}
 	return
