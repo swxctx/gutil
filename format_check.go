@@ -21,7 +21,7 @@ func IsValidPhone(phone string) bool {
 }
 
 // IsValidEmail 邮箱格式校验
-func IsValidEmail(email string) {
+func IsValidEmail(email string) bool {
 	if !EmailRegex.MatchString(email) || regexp.MustCompile(`^www\.`).MatchString(email) || regexp.MustCompile(`con$`).MatchString(email) {
 		return false
 	}
