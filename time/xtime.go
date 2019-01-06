@@ -69,3 +69,29 @@ func GetZeroTimeStamp(years, months, days int) int64 {
 	t := time.Now()
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days).Unix()
 }
+
+// 获取本周一零点的时间戳
+func GetMondayZeroTs() int32 {
+	nowTime := time.Now()
+	weekday := nowTime.Weekday()
+	if nowTime.Weekday() == 0 {
+		weekday = 7
+	}
+	return GetZeroTs() - (int32(weekday)-1)*86400
+}
+
+// 获取指定时间的时间戳
+func GetTsByTime(time time.Time) int32 {
+	return int32(time.UTC().Unix())
+}
+
+// GetTsInt64ByTime 获取指定时间的时间戳
+func GetTsInt64ByTime(time time.Time) int64 {
+	return time.UTC().Unix()
+}
+
+// 获取指定时间戳的时间
+func GetTimeByTs(ts int64) time.Time {
+	time := time.Unix(ts, 0)
+	return time
+}

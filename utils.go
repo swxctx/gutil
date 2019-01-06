@@ -2,13 +2,10 @@ package gutil
 
 import (
 	"crypto/rand"
-	"fmt"
 	"math"
 	"math/big"
 	"regexp"
 	"strconv"
-
-	"github.com/henrylee2cn/goutil/coarsetime"
 )
 
 /*
@@ -24,22 +21,6 @@ func GetSQLPlaceholder(list []string, params []interface{}) (s string, paramList
 			s += ","
 		}
 		paramList = append(paramList, list[i])
-	}
-	return
-}
-
-/*
- input: [1,2,3,4]
- output: 1,2,3,4
-*/
-// GetInt64SliceToString int64数组转为string
-func GetInt64SliceToString(list []int64) (s string) {
-	n := len(list)
-	for i := 0; i < len(list); i++ {
-		s += fmt.Sprintf("%v", list[i])
-		if i < n-1 {
-			s += ","
-		}
 	}
 	return
 }
@@ -95,24 +76,11 @@ func GenPiecesCount(min, max int64) int32 {
 	}
 }
 
-// StringSiceToInt64 string数组转[]int64
-func StringSiceToInt64(str []string) []int64 {
-	var (
-		ids []int64
-	)
-	for _, i := range str {
-		id, err := strconv.ParseInt(i, 10, 64)
-		if err != nil {
-			continue
-		}
-		ids = append(ids, id)
-	}
-	return ids
-}
-
 // RemoveElementToint32 移除数组内的指定元素
 func RemoveElementToint32(list []int32, value int32) []int32 {
-	var result = make([]int32, 0)
+	var (
+		result = make([]int32, 0)
+	)
 	index := 0
 	endIndex := len(list) - 1
 	for i, s := range list {
@@ -124,21 +92,6 @@ func RemoveElementToint32(list []int32, value int32) []int32 {
 		}
 	}
 	return result
-}
-
-// Int64ToString int64->string
-func Int64ToString(n int64) string {
-	return strconv.FormatInt(n, 10)
-}
-
-/*
-	input: 12.3455
-	output: 12
-*/
-// Float32ToInt64 float32转为int64
-func Float32ToInt64(count float32) (int64, error) {
-	countStr := fmt.Sprintf("%0.0f", count)
-	return strconv.ParseInt(countStr, 10, 64)
 }
 
 // IsStringExists 判断字符是否在切片里面
@@ -179,16 +132,4 @@ func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
 	theta := lng2 - lng1
 	dist := math.Acos(math.Sin(lat1)*math.Sin(lat2) + math.Cos(lat1)*math.Cos(lat2)*math.Cos(theta))
 	return dist * radius
-}
-
-// 生成随机字符串
-func GetRandomString(length int) string {
-	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	bytes := []byte(str)
-	result := []byte{}
-	r := rand.New(rand.NewSource(coarsetime.FloorTimeNow().UnixNano()))
-	for i := 0; i < length; i++ {
-		result = append(result, bytes[r.Intn(len(bytes))])
-	}
-	return string(result)
 }

@@ -22,7 +22,7 @@ func SendMsgToDinTalk(title, text, url string) error {
 		return fmt.Errorf("SendMsgToDinTalk: data marshal err-> %v", err)
 	}
 	// 发送
-	_, err = xhttp.PostJson(url, dataJson)
+	_, err = xhttp.PostJSON(url, dataJson)
 	if err != nil {
 		return fmt.Errorf("SendMsgToDinTalk: Post json err-> %v", err)
 	}
