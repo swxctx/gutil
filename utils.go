@@ -169,3 +169,20 @@ func GetImageSize(url string) (h, w int, err error) {
 	}
 	return icfg.Height, icfg.Width, nil
 }
+
+// CheckLongitudeAndLatitude 校验经纬度
+func CheckLongitudeAndLatitude(longitude, latitude float64) bool {
+	// 校验经度范围+-(0-180),小数位不大于20位
+	longitudeStr := strconv.FormatFloat(longitude, 'f', -1, 64)
+	reg := regexp.MustCompile(`^(\-|\+)?(((\d|[1-9]\d|1[0-7]\d|0{1,3})\.\d{0,20})|(\d|[1-9]\d|1[0-7]\d|0{1,3})|180\.0{0,20}|180)$`)
+	if !reg.MatchString(longitudeStr) {
+		return false
+	}
+	// 校验纬度范围+-(0-90),小数位不大于20位
+	latitudeStr := strconv.FormatFloat(latitude, 'f', -1, 64)
+	reg = regexp.MustCompile(`^(\-|\+)?([0-8]?\d{1}\.\d{0,20}|90\.0{0,20}|[0-8]?\d{1}|90)$`)
+	if !reg.MatchString(latitudeStr) {
+		return false
+	}
+	return true
+}
