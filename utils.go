@@ -158,7 +158,7 @@ func FromGBK(s string) (string, error) {
 
 // GetImageSize 图片(在线url)宽和高
 func GetImageSize(url string) (h, w int, err error) {
-	resp, err := http.Get(url)
+	resp, _, err := xhttp.Get(url)
 	if err != nil {
 		return
 	}
