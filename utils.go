@@ -2,10 +2,16 @@ package gutil
 
 import (
 	"crypto/rand"
+	"image"
 	"math"
 	"math/big"
 	"regexp"
 	"strconv"
+
+	"github.com/usthooz/gutil/http"
+
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 )
 
 /*
@@ -132,4 +138,34 @@ func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
 	theta := lng2 - lng1
 	dist := math.Acos(math.Sin(lat1)*math.Sin(lat2) + math.Cos(lat1)*math.Cos(lat2)*math.Cos(theta))
 	return dist * radius
+}
+
+// ToGBK
+func ToGBK(s string) (string, error) {
+	enc := simplifiedchinese.GBK
+	trans := enc.NewEncoder()
+	r, _, err := transform.String(trans, s)
+	return r, err
+}
+
+// FromGBK
+func FromGBK(s string) (string, error) {
+	enc := simplifiedchinese.GBK
+	trans := enc.NewDecoder()
+	r, _, err := transform.String(trans, s)
+	return r, err
+}
+
+// GetImageSize 图片(在线url)宽和高
+func GetImageSize(url string) (h, w int, err error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+	icfg, _, err := image.DecodeConfig(resp.Body)
+	if err != nil {
+		return
+	}
+	return icfg.Height, icfg.Width, nil
 }
