@@ -1,6 +1,7 @@
 package xtime
 
 import (
+	"fmt"
 	"strings"
 	"time"
 )
@@ -94,4 +95,46 @@ func GetTsInt64ByTime(time time.Time) int64 {
 func GetTimeByTs(ts int64) time.Time {
 	time := time.Unix(ts, 0)
 	return time
+}
+
+// 获取时间间隔函数 根据秒数返回 X天X小时X分钟X秒 的结果
+func GetTimeRangeInfoDay(seconds int64) string {
+	var (
+		day, hour, minute, second int64
+	)
+	if seconds >= 86400 {
+		day = day / 86400
+		seconds = seconds % 86400
+	}
+	if seconds >= 3600 {
+		hour = seconds / 3600
+		seconds = seconds % 3600
+	}
+	if seconds >= 60 {
+		minute = seconds / 60
+		seconds = seconds % 60
+	}
+	second = seconds
+	return fmt.Sprintf("%d小时%d分钟%d秒", hour, minute, second)
+}
+
+// GetRemainingTimeBySeconds X天X小时X分钟X秒
+func GetRemainingTimeBySeconds(seconds int64) string {
+	var (
+		day, hour, minute, second int64
+	)
+	if seconds >= 86400 {
+		day = seconds / 86400
+		seconds = seconds % 86400
+	}
+	if seconds >= 3600 {
+		hour = seconds / 3600
+		seconds = seconds % 3600
+	}
+	if seconds >= 60 {
+		minute = seconds / 60
+		seconds = seconds % 60
+	}
+	second = seconds
+	return fmt.Sprintf("%d天%d小时%d分钟%d秒", day, hour, minute, second)
 }
