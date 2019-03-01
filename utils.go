@@ -1,10 +1,8 @@
 package gutil
 
 import (
-	"crypto/rand"
 	"image"
 	"math"
-	"math/big"
 	"regexp"
 	"strconv"
 
@@ -43,45 +41,6 @@ func IntMax(i1, i2 int) int {
 	return i2
 }
 
-// GenRandCountForDiff 生成指定范围内的指定个数(不同的数字)
-func GenRandCountForDiff(min, max int64, count int) []int64 {
-	var (
-		allCount map[int64]int64
-		result   []int64
-	)
-	allCount = make(map[int64]int64)
-	maxBigInt := big.NewInt(max)
-	for {
-		// rand
-		i, _ := rand.Int(rand.Reader, maxBigInt)
-		number := i.Int64()
-		// 是否大于下标
-		if i.Int64() >= min {
-			// 是否已经存在
-			_, ok := allCount[number]
-			if !ok {
-				result = append(result, number)
-				// 添加到map
-				allCount[number] = number
-			}
-		}
-		if len(result) >= count {
-			return result
-		}
-	}
-}
-
-// GenRandCountByArea 随机生成指定范围内的数
-func GenPiecesCount(min, max int64) int32 {
-	maxBigInt := big.NewInt(max)
-	for {
-		i, _ := rand.Int(rand.Reader, maxBigInt)
-		if i.Int64() >= min {
-			return int32(i.Int64())
-		}
-	}
-}
-
 // RemoveElementToint32 移除数组内的指定元素
 func RemoveElementToint32(list []int32, value int32) []int32 {
 	var (
@@ -98,16 +57,6 @@ func RemoveElementToint32(list []int32, value int32) []int32 {
 		}
 	}
 	return result
-}
-
-// IsStringExists 判断字符是否在切片里面
-func IsStringExists(needle string, haystack []string) bool {
-	for _, b := range haystack {
-		if b == needle {
-			return true
-		}
-	}
-	return false
 }
 
 // CheckLongitudeAndLatitude 校验经纬度
