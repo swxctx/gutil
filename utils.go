@@ -1,10 +1,12 @@
 package gutil
 
 import (
+	"fmt"
 	"image"
 	"math"
 	"regexp"
 	"strconv"
+	"unicode/utf8"
 
 	"github.com/usthooz/gutil/http"
 
@@ -117,4 +119,22 @@ func GetImageSize(url string) (h, w int, err error) {
 		return
 	}
 	return icfg.Height, icfg.Width, nil
+}
+
+// FilterEmoji 过滤 emoji 表情
+func FilterEmoji(content string) string {
+	var (
+		newContent string
+	)
+	for _, value := range content {
+		_, size := utf8.DecodeRuneInString(string(value))
+		if size <= 3 {
+			f := fmt.Sprintf("%#U", value)
+			if f == "U+200D" {
+				continue
+			}
+			newContent += string(value)
+		}
+	}
+	return newContent
 }
