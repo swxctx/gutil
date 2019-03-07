@@ -31,3 +31,45 @@ func Float64Ptr(i float64) *float64 {
 func TimePtr(t time.Time) *time.Time {
 	return &t
 }
+
+func PtrString(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}
+
+func PtrBool(i *bool) bool {
+	if i == nil {
+		return false
+	}
+	return *i
+}
+
+func PtrByte(i *byte) byte {
+	if i == nil {
+		return byte(0)
+	}
+	return *i
+}
+
+func PtrInt32(i *int32) int32 {
+	if i == nil {
+		return 0
+	}
+	return *i
+}
+
+func PtrInt64(i *int64) int64 {
+	if i == nil {
+		return 0
+	}
+	return *i
+}
+
+func PtrFloat64(i *float64) float64 {
+	if i == nil {
+		return float64(0)
+	}
+	return *i
+}
