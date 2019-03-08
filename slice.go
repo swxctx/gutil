@@ -50,8 +50,18 @@ func AddToFloat64(list []float64, e float64) []float64 {
 	return append(list, e)
 }
 
-// AddToAddToStringFloat32 add a element to slice
+// AddToString add a element to slice
 func AddToString(list []string, e string) []string {
+	for _, l := range list {
+		if l == e {
+			return list
+		}
+	}
+	return append(list, e)
+}
+
+// AddToInterface add a element to slice
+func AddToInterface(list []interface{}, e interface{}) []interface{} {
 	for _, l := range list {
 		if l == e {
 			return list
