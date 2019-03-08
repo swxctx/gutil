@@ -29,3 +29,23 @@ func AddToInt64(list []int64, e int64) []int64 {
 	}
 	return append(list, e)
 }
+
+// AddToFloat32 add a element to slice
+func AddToFloat32(list []float32, e float32) []float32 {
+	for _, l := range list {
+		if l == e {
+			return list
+		}
+	}
+	return append(list, e)
+}
+
+// AddToFloat64 add a element to slice
+func AddToFloat64(list []float64, e float64) []float64 {
+	for _, l := range list {
+		if l == e {
+			return list
+		}
+	}
+	return append(list, e)
+}
