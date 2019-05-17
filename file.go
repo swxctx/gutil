@@ -1,8 +1,12 @@
 package gutil
 
 import (
+	"bufio"
 	"encoding/csv"
+	"fmt"
+	"io"
 	"os"
+	"strings"
 )
 
 // WriteCsv 写入数据到csv文件
@@ -47,4 +51,46 @@ func ReadCsv(file string) ([][]string, error) {
 		return rows, err
 	}
 	return rows
+}
+
+// WriteMaptoFile
+func WriteMaptoFile(m map[string]string, filePath string) error {
+	f, err := os.Create(filePath)
+	if err != nil {
+		fmt.Printf("create map file error: %v\n", err)
+		return err
+	}
+	defer f.Close()
+
+	w := bufio.NewWriter(f)
+	for _, v := range m {
+		lineStr := fmt.Sprintf("%s", v)
+		fmt.Fprintln(w, lineStr)
+	}
+	return w.Flush()
+}
+
+// ReadMapToFile
+func ReadMapToFile(fileName) map[string]string {
+	file, err := os.Open(fileName)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	var (
+		result map[string]string
+	)
+	result = make(map[string]string)
+
+	rd := bufio.NewReader(file)
+	for {
+		line, err := rd.ReadString('\n')
+		if err != nil || io.EOF == err {
+			break
+		}
+		line = strings.Replace(line, "\n", "", -1)
+		result[line] = line
+	}
+	return result
 }
