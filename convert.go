@@ -79,3 +79,17 @@ func Float32ToInt64(count float32) (int64, error) {
 	countStr := fmt.Sprintf("%0.0f", count)
 	return strconv.ParseInt(countStr, 10, 64)
 }
+
+// InterfaceToString interface转换成string
+func InterfaceToString(interf interface{}) string {
+	rs := ""
+	switch interf.(type) {
+	case int, int32, int64:
+		rs = fmt.Sprintf("%d", interf)
+	case float32, float64:
+		rs = fmt.Sprintf("%.0f", interf)
+	case string:
+		rs = fmt.Sprintf("%s", interf)
+	}
+	return rs
+}
