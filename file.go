@@ -46,11 +46,11 @@ func ReadCsv(file string) ([][]string, error) {
 	defer csvFile.Close()
 
 	csvReader := csv.NewReader(csvFile)
-	rows, err := csvReader.ReadAll()
+	rows, err = csvReader.ReadAll()
 	if err != nil {
 		return rows, err
 	}
-	return rows
+	return rows, nil
 }
 
 // WriteMaptoFile
@@ -71,7 +71,7 @@ func WriteMaptoFile(m map[string]string, filePath string) error {
 }
 
 // ReadMapToFile
-func ReadMapToFile(fileName) map[string]string {
+func ReadMapToFile(fileName string) map[string]string {
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
