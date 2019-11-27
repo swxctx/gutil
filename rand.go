@@ -21,6 +21,15 @@ func RandString(l int) string {
 	return string(bs)
 }
 
+// RandByte
+func RandByte(l int) []byte {
+	bs := []byte{}
+	for i := 0; i < l; i++ {
+		bs = append(bs, chars[mrand.Intn(len(chars))])
+	}
+	return bs
+}
+
 // GenRandCountForDiff 生成指定范围内的指定个数(不同的数字)
 func GenRandCountForDiff(min, max int64, count int) []int64 {
 	var (
