@@ -57,7 +57,6 @@ func ReadCsv(file string) ([][]string, error) {
 func WriteMaptoFile(m map[string]string, filePath string) error {
 	f, err := os.Create(filePath)
 	if err != nil {
-		fmt.Printf("create map file error: %v\n", err)
 		return err
 	}
 	defer f.Close()
@@ -65,6 +64,21 @@ func WriteMaptoFile(m map[string]string, filePath string) error {
 	w := bufio.NewWriter(f)
 	for _, v := range m {
 		lineStr := fmt.Sprintf("%s", v)
+		fmt.Fprintln(w, lineStr)
+	}
+	return w.Flush()
+}
+
+// WriteSliceToFile
+func WriteSliceToFile(arrs []string, filePath string) error {
+	f, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	w := bufio.NewWriter(f)
+	for _, lineStr := range arrs {
 		fmt.Fprintln(w, lineStr)
 	}
 	return w.Flush()
@@ -145,4 +159,25 @@ func DewightDat(file1, file2 string, resfile string) error {
 		return err
 	}
 	return nil
+}
+
+// CreateFile
+func CreateFile(fileName string) error {
+	_, err := os.Create(fileName)
+	return err
+}
+
+// FileIsExist 判断文件或文件夹是否存在
+func FileIsExist(path string) bool {
+	_, err := os.Stat(path)
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		if os.IsNotExist(err) {
+			return false
+		}
+		return false
+	}
+	return true
 }
