@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 )
 
@@ -33,4 +34,20 @@ func GetLocalPublicIp() (ip string, err error) {
 	b = b[:idx]
 	ip = string(b)
 	return
+}
+
+// ParseIpToUint32 ip转换为uint32
+func ParseIpToUint32(s string) (uint32, error) {
+	var (
+		ip uint32
+	)
+	ipObj := net.ParseIP(s)
+	if ipObj == nil {
+		return ip, errors.New("ip parse failed")
+	}
+	ip |= uint32(ipObj[12]) << 24
+	ip |= uint32(ipObj[13]) << 16
+	ip |= uint32(ipObj[14]) << 8
+	ip |= uint32(ipObj[15])
+	return ip, nil
 }
