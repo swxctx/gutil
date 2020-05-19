@@ -4,6 +4,9 @@ import "time"
 
 // GetAgeByBirthDayTS 跟据生日时间戳获取年龄
 func GetAgeByBirthDayTS(ts int64) int {
+	if ts <= 0 {
+		return 0
+	}
 	// 当前时间
 	nowTm := time.Now()
 	// 生日时间
