@@ -50,8 +50,8 @@ var (
 	}
 )
 
-// Check citizen number 18 valid.
-func IsValidCitizenNo18(citizenNo18 *[]byte) bool {
+// isValidCitizenNo18 Check citizen number 18 valid.
+func isValidCitizenNo18(citizenNo18 *[]byte) bool {
 	nLen := len(*citizenNo18)
 	if nLen != 18 {
 		return false
@@ -70,8 +70,8 @@ func IsValidCitizenNo18(citizenNo18 *[]byte) bool {
 	return false
 }
 
-// Convert citizen 15 to 18.
-func Citizen15To18(citizenNo15 []byte) []byte {
+// citizen15To18 Convert citizen 15 to 18.
+func citizen15To18(citizenNo15 []byte) []byte {
 	nLen := len(citizenNo15)
 	if nLen != 15 {
 		return nil
@@ -93,8 +93,8 @@ func Citizen15To18(citizenNo15 []byte) []byte {
 	return citizenNo18
 }
 
-// IsLeapYear 闰年
-func IsLeapYear(nYear int) bool {
+// isLeapYear 闰年
+func isLeapYear(nYear int) bool {
 	if nYear <= 0 {
 		return false
 	}
@@ -106,8 +106,8 @@ func IsLeapYear(nYear int) bool {
 	return false
 }
 
-// Check birthday's year month day valid.
-func CheckBirthdayValid(nYear, nMonth, nDay int) bool {
+// checkBirthdayValid Check birthday's year month day valid.
+func checkBirthdayValid(nYear, nMonth, nDay int) bool {
 	if nYear < 1900 || nMonth <= 0 || nMonth > 12 || nDay <= 0 || nDay > 31 {
 		return false
 	}
@@ -122,7 +122,7 @@ func CheckBirthdayValid(nYear, nMonth, nDay int) bool {
 	}
 
 	if 2 == nMonth {
-		if IsLeapYear(nYear) && nDay > 29 {
+		if isLeapYear(nYear) && nDay > 29 {
 			return false
 		} else if nDay > 28 {
 			return false
@@ -136,8 +136,8 @@ func CheckBirthdayValid(nYear, nMonth, nDay int) bool {
 	return true
 }
 
-// Check province code valid.
-func CheckProvinceValid(citizenNo []byte) bool {
+// checkProvinceValid Check province code valid.
+func checkProvinceValid(citizenNo []byte) bool {
 	provinceCode := make([]byte, 0)
 	provinceCode = append(provinceCode, citizenNo[:2]...)
 	provinceStr := string(provinceCode)
@@ -149,8 +149,8 @@ func CheckProvinceValid(citizenNo []byte) bool {
 	return false
 }
 
-// Check citizen number valid.
-func IsValidCitizenNo(citizenNo *[]byte) bool {
+// isValidCitizenNo Check citizen number valid.
+func isValidCitizenNo(citizenNo *[]byte) bool {
 	nLen := len(*citizenNo)
 	if nLen != 15 && nLen != 18 {
 		return false
@@ -169,23 +169,23 @@ func IsValidCitizenNo(citizenNo *[]byte) bool {
 		return false
 	}
 
-	if !CheckProvinceValid(*citizenNo) {
+	if !checkProvinceValid(*citizenNo) {
 		return false
 	}
 
 	if nLen == 15 {
-		*citizenNo = Citizen15To18(*citizenNo)
+		*citizenNo = citizen15To18(*citizenNo)
 		if citizenNo == nil {
 			return false
 		}
-	} else if !IsValidCitizenNo18(citizenNo) {
+	} else if !isValidCitizenNo18(citizenNo) {
 		return false
 	}
 
 	nYear, _ := strconv.Atoi(string((*citizenNo)[6:10]))
 	nMonth, _ := strconv.Atoi(string((*citizenNo)[10:12]))
 	nDay, _ := strconv.Atoi(string((*citizenNo)[12:14]))
-	if !CheckBirthdayValid(nYear, nMonth, nDay) {
+	if !checkBirthdayValid(nYear, nMonth, nDay) {
 		return false
 	}
 
@@ -204,7 +204,7 @@ type IdCard struct {
 
 // Get information from citizen number. Birthday, gender, province mask.
 func GetCitizenNoInfo(citizenNo []byte) (*IdCard, error) {
-	if !IsValidCitizenNo(&citizenNo) {
+	if !isValidCitizenNo(&citizenNo) {
 		return nil, errors.New("Invalid citizen number.")
 	}
 
