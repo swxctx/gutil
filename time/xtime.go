@@ -72,13 +72,13 @@ func GetZeroTimeStamp(years, months, days int) int64 {
 }
 
 // 获取本周一零点的时间戳
-func GetMondayZeroTs() int32 {
+func GetMondayZeroTs() int64 {
 	nowTime := time.Now()
 	weekday := nowTime.Weekday()
 	if nowTime.Weekday() == 0 {
 		weekday = 7
 	}
-	return GetZeroTs() - (int32(weekday)-1)*86400
+	return GetTodayZeroTs() - (int64(weekday)-1)*86400
 }
 
 // 获取指定时间的时间戳
@@ -137,4 +137,56 @@ func GetRemainingTimeBySeconds(seconds int64) string {
 	}
 	second = seconds
 	return fmt.Sprintf("%d天%d小时%d分钟%d秒", day, hour, minute, second)
+}
+
+// GetWeekByIntDay 获取每周返回为int值,1-7
+func GetWeekByIntDay(weekDay string) int32 {
+	switch weekDay {
+	case "Monday":
+		return 1
+	case "Tuesday":
+		return 2
+	case "Wednesday":
+		return 3
+	case "Thursday":
+		return 4
+	case "Friday":
+		return 5
+	case "Saturday":
+		return 6
+	case "Sunday":
+		return 7
+	}
+	return 0
+}
+
+// GetMonthByInt 获取每月返回为int值,1-12
+func GetMonthByInt(weekDay string) int32 {
+	switch weekDay {
+	case "January":
+		return 1
+	case "February":
+		return 2
+	case "March":
+		return 3
+	case "April":
+		return 4
+	case "May":
+		return 5
+	case "June":
+		return 6
+	case "July":
+		return 7
+	case "August":
+		return 8
+	case "September":
+		return 9
+	case "October":
+		return 10
+	case "November":
+		return 11
+	case "December":
+		return 12
+	}
+	return 0
 }
