@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/usthooz/gutil/http"
+	xhttp "github.com/usthooz/gutil/http"
 )
 
 // SendMsgToDinTalk 发送消息到钉钉

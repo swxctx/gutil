@@ -24,29 +24,29 @@ var (
 		"31": "上海市",
 		"32": "江苏省",
 		"33": "浙江省",
-		"34":"安徽省",
-		"35":"福建省",
-		"36":"山西省",
-		"37":"山东省",
-		"41":"河南省",
-		"42":"湖北省",
-		"43":"湖南省",
-		"44":"广东省",
-		"45":"广西壮族自治区",
-		"46":"海南省",
-		"50":"重庆市",
-		"51":"四川省",
-		"52":"贵州省",
-		"53":"云南省",
-		"54":"西藏自治区",
-		"61":"陕西省",
-		"62":"甘肃省",
-		"63":"青海省",
-		"64":"宁夏回族自治区",
-		"65":"新疆维吾尔自治区",
-		"71":"台湾省",
-		"81":"香港特别行政区",
-		"91":"澳门特别行政区",
+		"34": "安徽省",
+		"35": "福建省",
+		"36": "山西省",
+		"37": "山东省",
+		"41": "河南省",
+		"42": "湖北省",
+		"43": "湖南省",
+		"44": "广东省",
+		"45": "广西壮族自治区",
+		"46": "海南省",
+		"50": "重庆市",
+		"51": "四川省",
+		"52": "贵州省",
+		"53": "云南省",
+		"54": "西藏自治区",
+		"61": "陕西省",
+		"62": "甘肃省",
+		"63": "青海省",
+		"64": "宁夏回族自治区",
+		"65": "新疆维吾尔自治区",
+		"71": "台湾省",
+		"81": "香港特别行政区",
+		"91": "澳门特别行政区",
 	}
 )
 
@@ -58,7 +58,7 @@ func isValidCitizenNo18(citizenNo18 *[]byte) bool {
 	}
 
 	nSum := 0
-	for i := 0; i < nLen - 1; i++ {
+	for i := 0; i < nLen-1; i++ {
 		n, _ := strconv.Atoi(string((*citizenNo18)[i]))
 		nSum += n * weight[i]
 	}
@@ -79,7 +79,7 @@ func citizen15To18(citizenNo15 []byte) []byte {
 
 	citizenNo18 := make([]byte, 0)
 	citizenNo18 = append(citizenNo18, citizenNo15[:6]...)
-	citizenNo18 = append(citizenNo18, '1', '9');
+	citizenNo18 = append(citizenNo18, '1', '9')
 	citizenNo18 = append(citizenNo18, citizenNo15[6:]...)
 
 	sum := 0
@@ -99,7 +99,7 @@ func isLeapYear(nYear int) bool {
 		return false
 	}
 
-	if (nYear % 4 == 0 && nYear % 100 != 0) || nYear % 400 == 0 {
+	if (nYear%4 == 0 && nYear%100 != 0) || nYear%400 == 0 {
 		return true
 	}
 
@@ -143,7 +143,7 @@ func checkProvinceValid(citizenNo []byte) bool {
 	provinceStr := string(provinceCode)
 
 	// 判断省份/地区是否合规
-	if _,ok := validProvince[provinceStr];ok {
+	if _, ok := validProvince[provinceStr]; ok {
 		return true
 	}
 	return false
@@ -218,7 +218,7 @@ func GetCitizenNoInfo(citizenNo []byte) (*IdCard, error) {
 	// Gender information.
 	genderMask, _ := strconv.Atoi(string(citizenNo[16]))
 	if genderMask%2 == 0 {
-		gender =2
+		gender = 2
 	}
 
 	// Address code mask.
@@ -226,7 +226,7 @@ func GetCitizenNoInfo(citizenNo []byte) (*IdCard, error) {
 
 	return &IdCard{
 		Birthday: birthday,
-		Sex: gender,
+		Sex:      gender,
 		AddrMask: addrMask,
-	},nil
+	}, nil
 }
