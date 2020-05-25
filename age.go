@@ -10,7 +10,7 @@ func GetAgeByBirthDayTS(ts int64) int {
 	// 当前时间
 	nowTm := time.Now()
 	// 生日时间
-	birthTm := time.Unix(0, ts)
+	birthTm := time.Unix(ts, 0)
 	subYear := nowTm.Year() - birthTm.Year()
 
 	if subYear <= 0 {
