@@ -162,7 +162,7 @@ func isValidCitizenNo(citizenNo *[]byte) bool {
 			continue
 		}
 
-		if (v == 'X' && i == 16) || (v == 'x' && i == 16) {
+		if v == 'X' && i == 16 {
 			continue
 		}
 
