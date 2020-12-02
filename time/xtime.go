@@ -57,6 +57,12 @@ func GetTodayZeroTs() int64 {
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.Local).Unix()
 }
 
+// GetZeroTsByTs 获取指定时间戳当天的零点时间戳
+func GetZeroTsByTs(ts int64) int64 {
+	tm := time.Unix(openInfo.CreatedAt, 10)
+	return time.Date(tm.Year(), tm.Month(), tm.Day(), 0, 0, 0, 0, time.Local).Unix()
+}
+
 // ReverseStringSlice 数组反转
 func ReverseStringSlice(strs []string) []string {
 	for i, j := 0, len(strs)-1; i < j; i, j = i+1, j-1 {
