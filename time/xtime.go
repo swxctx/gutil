@@ -59,7 +59,7 @@ func GetTodayZeroTs() int64 {
 
 // GetZeroTsByTs 获取指定时间戳当天的零点时间戳
 func GetZeroTsByTs(ts int64) int64 {
-	tm := time.Unix(openInfo.CreatedAt, 10)
+	tm := time.Unix(ts, 10)
 	return time.Date(tm.Year(), tm.Month(), tm.Day(), 0, 0, 0, 0, time.Local).Unix()
 }
 
