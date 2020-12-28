@@ -196,3 +196,13 @@ func GetMonthByInt(weekDay string) int32 {
 	}
 	return 0
 }
+
+// GetFirstDateOfWeek 获取本周一时间
+func GetFirstDateOfWeek() time.Time {
+	now := time.Now()
+	offset := int(time.Monday - now.Weekday())
+	if offset > 0 {
+		offset = -6
+	}
+	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).AddDate(0, 0, offset)
+}
