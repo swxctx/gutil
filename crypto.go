@@ -4,7 +4,9 @@ import (
 	"crypto/aes"
 	"crypto/hmac"
 	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 )
 
 // AESEncryptData
@@ -84,4 +86,11 @@ func HmacSHA1(key string, data string) string {
 	mac := hmac.New(sha1.New, []byte(key))
 	mac.Write([]byte(data))
 	return hex.EncodeToString(mac.Sum(nil))
+}
+
+// Sha256
+func Sha256(s string) string {
+	h := sha256.New()
+	h.Write([]byte(s))
+	return fmt.Sprintf("%x", h.Sum(nil))
 }
