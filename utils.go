@@ -91,6 +91,14 @@ func EarthDistance(lat1, lng1, lat2, lng2 float64) float64 {
 	return dist * radius
 }
 
+// GetXYDistance 计算平面内两点间距离
+func GetXYDistance(x1, y1, x2, y2 float64) float64 {
+	if x1 == x2 && y1 == y2 {
+		return 0
+	}
+	return math.Sqrt(math.Pow(x1-x2, 2) + math.Pow(y1-y2, 2))
+}
+
 // ToGBK
 func ToGBK(s string) (string, error) {
 	enc := simplifiedchinese.GBK

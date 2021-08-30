@@ -57,6 +57,12 @@ func GetTodayZeroTs() int64 {
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.Local).Unix()
 }
 
+// GetZeroTsByTs 获取指定时间戳当天的零点时间戳
+func GetZeroTsByTs(ts int64) int64 {
+	tm := time.Unix(ts, 10)
+	return time.Date(tm.Year(), tm.Month(), tm.Day(), 0, 0, 0, 0, time.Local).Unix()
+}
+
 // ReverseStringSlice 数组反转
 func ReverseStringSlice(strs []string) []string {
 	for i, j := 0, len(strs)-1; i < j; i, j = i+1, j-1 {
@@ -69,6 +75,12 @@ func ReverseStringSlice(strs []string) []string {
 func GetZeroTimeStamp(years, months, days int) int64 {
 	t := time.Now()
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days).Unix()
+}
+
+// GetZeroTime 获取一段时间后的零点
+func GetZeroTime(years, months, days int) time.Time {
+	t := time.Now()
+	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days)
 }
 
 // 获取本周一零点的时间戳
@@ -189,4 +201,14 @@ func GetMonthByInt(weekDay string) int32 {
 		return 12
 	}
 	return 0
+}
+
+// GetFirstDateOfWeek 获取本周一时间
+func GetFirstDateOfWeek() time.Time {
+	now := time.Now()
+	offset := int(time.Monday - now.Weekday())
+	if offset > 0 {
+		offset = -6
+	}
+	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).AddDate(0, 0, offset)
 }

@@ -2,6 +2,8 @@ package gutil
 
 import (
 	"crypto/aes"
+	"crypto/hmac"
+	"crypto/sha1"
 	"encoding/hex"
 )
 
@@ -75,4 +77,11 @@ func padData(d []byte, bs int) []byte {
 		d = append(d, byte(pad))
 	}
 	return d
+}
+
+// HmacSHA1
+func HmacSHA1(key string, data string) string {
+	mac := hmac.New(sha1.New, []byte(key))
+	mac.Write([]byte(data))
+	return hex.EncodeToString(mac.Sum(nil))
 }
