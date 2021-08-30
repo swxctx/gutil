@@ -3,7 +3,7 @@ package idcard
 import (
 	"testing"
 
-	"github.com/usthooz/gutil"
+	"github.com/swxctx/gutil"
 )
 
 // TestIdCard

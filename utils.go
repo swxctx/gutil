@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"unicode/utf8"
 
-	xhttp "github.com/usthooz/gutil/http"
+	xhttp "github.com/swxctx/gutil/http"
 
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
