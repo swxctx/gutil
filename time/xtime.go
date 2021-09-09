@@ -212,3 +212,8 @@ func GetFirstDateOfWeek() time.Time {
 	}
 	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).AddDate(0, 0, offset)
 }
+
+// ParseInLocation 时间戳字符串转换->time.Time
+func ParseInLocation(tm, layout string) (time.Time, error) {
+	return time.ParseInLocation(layout, tm, time.Local)
+}
