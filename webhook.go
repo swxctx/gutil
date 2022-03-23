@@ -3,17 +3,24 @@ package gutil
 import (
 	"encoding/json"
 	"fmt"
-
 	xhttp "github.com/usthooz/gutil/http"
 )
 
 // SendMsgToDinTalk 发送消息到钉钉
-func SendMsgToDinTalk(title, text, url string) error {
+func SendMsgToDinTalk(title, text, url string, phones ...string) error {
+	if len(phones) > 0 {
+		for _, p := range phones {
+			text = fmt.Sprintf("@%s%s", p, text)
+		}
+	}
 	data := map[string]interface{}{
 		"msgtype": "markdown",
 		"markdown": map[string]string{
 			"title": title,
 			"text":  text,
+		},
+		"at": map[string][]string{
+			"atMobiles": phones,
 		},
 	}
 	// 数据编码
