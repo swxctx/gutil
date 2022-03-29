@@ -6,7 +6,7 @@ import "fmt"
     @date: 2022/3/29
 **/
 
-// 截取字符串指定长度
+// SubString 截取字符串指定长度
 func SubString(str string, start, end int) (string, error) {
 	rs := []rune(str)
 	rl := len(rs)
