@@ -1,6 +1,9 @@
 package gutil
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 /**
     @date: 2022/3/29
@@ -19,3 +22,18 @@ func SubString(str string, start, end int) (string, error) {
 	}
 	return string(rs[start:end]), nil
 }
+
+// Returns an int >= min, < max
+func RandomInt(min, max int) int {
+	return min + rand.Intn(max-min)
+}
+
+// len 传入需要随机生产的字符串长度   min ,max 分别传入字符对应的ASCII值
+func RandomString(len ,min,max int) string {
+	bytes := make([]byte, len)
+	for i := 0; i < len; i++ {
+		bytes[i] = byte(RandomInt(min, max))
+	}
+	return string(bytes)
+}
+
