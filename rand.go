@@ -127,12 +127,12 @@ func RandomBytes(n int) []byte {
 	return b
 }
 
-// min ,max 分别传入字符对应的ASCII值
+// RandomInt min ,max 分别传入字符对应的ASCII值
 func RandomInt(min, max int) int {
 	return min + mrand.Intn(max-min)
 }
 
-// len 传入需要随机生产的字符串长度
+// RandomString len 传入需要随机生产的字符串长度
 // min ,max 分别传入字符对应的ASCII值
 func RandomString(len, min, max int) string {
 	bytes := make([]byte, len)
