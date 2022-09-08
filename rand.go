@@ -71,7 +71,20 @@ func GenPiecesCount(min, max int64) int32 {
 
 const (
 	// UpperWordsAndNumber 数字与大写字母
-	UpperWordsAndNumber = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	UpperWordsAndNumber     = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	RandUpperWordsAndNumber = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	// LowerWordsAndNumber 数字与小写字母组合
+	RandLowerWordsAndNumber = "0123456789abcdefghijklmnopqrstuvwxyz"
+	// RandLowerWords 小写字母组合
+	RandLowerWords = "abcdefghijklmnopqrstuvwxyz"
+	// RandUpperWords 大写字母组合
+	RandUpperWords = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	// RandLowerAndUpperWords 大小写字母组合
+	RandLowerAndUpperWords = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	// RandLowerAndUpperWordsAndNumber 数字大小写字母组合
+	RandLowerAndUpperWordsAndNumber = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	// RandNumers 数字组合
+	RandNumbers = "0123456789"
 )
 
 // NewRandom creates a new padded Encoding defined by the given alphabet string.
