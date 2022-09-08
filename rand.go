@@ -21,6 +21,15 @@ func RandString(l int) string {
 	return string(bs)
 }
 
+// RandStringByChar
+func RandStringByChar(charsArg []byte, l int) string {
+	bs := []byte{}
+	for i := 0; i < l; i++ {
+		bs = append(bs, charsArg[mrand.Intn(len(chars))])
+	}
+	return string(bs)
+}
+
 // RandByte
 func RandByte(l int) []byte {
 	bs := []byte{}
