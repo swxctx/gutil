@@ -196,7 +196,7 @@ func isValidCitizenNo(citizenNo *[]byte) bool {
 type IdCard struct {
 	// 生日时间戳
 	Birthday int64
-	// [1: 女性 2: 男性]
+	// [1: 男性 2: 女性]
 	Sex int
 	// 省份/地区编码
 	AddrMask int
