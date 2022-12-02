@@ -36,6 +36,28 @@ func GetLocalPublicIp() (ip string, err error) {
 	return
 }
 
+// ExtranetIP get external IP addr.
+func ExtranetIP() (ip string, err error) {
+	defer func() {
+		if p := recover(); p != nil {
+			err = fmt.Errorf("Get external IP error: %v", p)
+		} else if err != nil {
+			err = errors.New("Get external IP error: " + err.Error())
+		}
+	}()
+	resp, err := http.Get("https://myexternalip.com/raw")
+	if err != nil {
+		return
+	}
+	b, err := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
+	if err != nil {
+		return
+	}
+	ip = string(b)
+	return
+}
+
 // ParseIpToUint32 ip转换为uint32
 func ParseIpToUint32(s string) (uint32, error) {
 	var (
