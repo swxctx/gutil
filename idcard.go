@@ -122,9 +122,10 @@ func checkBirthdayValid(nYear, nMonth, nDay int) bool {
 	}
 
 	if 2 == nMonth {
-		if isLeapYear(nYear) && nDay > 29 {
+		isLeap := isLeapYear(nYear)
+		if isLeap && nDay > 29 {
 			return false
-		} else if nDay > 28 {
+		} else if !isLeap && nDay > 28 {
 			return false
 		}
 	} else if 4 == nMonth || 6 == nMonth || 9 == nMonth || 11 == nMonth {
