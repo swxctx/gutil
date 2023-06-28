@@ -77,9 +77,19 @@ func GetZeroTimeStamp(years, months, days int) int64 {
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days).Unix()
 }
 
+// GetZeroTimeStampForTime 获取一段时间后的零点
+func GetZeroTimeStampByTime(t time.Time, years, months, days int) int64 {
+	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days).Unix()
+}
+
 // GetZeroTime 获取一段时间后的零点
 func GetZeroTime(years, months, days int) time.Time {
 	t := time.Now()
+	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days)
+}
+
+// GetZeroTime 获取一段时间后的零点
+func GetZeroTimeByTime(t time.Time, years, months, days int) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).AddDate(years, months, days)
 }
 
