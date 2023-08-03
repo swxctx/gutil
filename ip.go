@@ -45,7 +45,7 @@ func ExtranetIP() (ip string, err error) {
 			err = errors.New("Get external IP error: " + err.Error())
 		}
 	}()
-	resp, err := http.Get("https://myexternalip.com/raw")
+	resp, err := http.Get("http://myexternalip.com/raw")
 	if err != nil {
 		return
 	}
