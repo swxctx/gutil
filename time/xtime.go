@@ -39,12 +39,6 @@ func GetThisMonthFirstZeros() int64 {
 	return time.Date(year, month, 1, 0, 0, 0, 0, time.Local).Unix()
 }
 
-// GetMonthZeroTs 获取每月时间
-func GetMonthZeroTs() int64 {
-	t := time.Now()
-	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.Local).AddDate(0, 0, 1).Unix()
-}
-
 // GetTomorrowZeroTs 获取明天0点时间
 func GetTomorrowZeroTs() int64 {
 	t := time.Now()
@@ -61,6 +55,13 @@ func GetTodayZeroTs() int64 {
 func GetZeroTsByTs(ts int64) int64 {
 	tm := time.Unix(ts, 10)
 	return time.Date(tm.Year(), tm.Month(), tm.Day(), 0, 0, 0, 0, time.Local).Unix()
+}
+
+// 获取指定月份的1号零点时间戳(offsetMonth < 0 往前推 > 0 往后推)
+func GetMonthStartZeroTs(offsetMonth int) int64 {
+	tm := time.Now()
+	firstOfLastMonth := time.Date(tm.Year(), tm.Month()-time.Month(-offsetMonth), 1, 0, 0, 0, 0, tm.Location())
+	return firstOfLastMonth.Unix()
 }
 
 // ReverseStringSlice 数组反转
