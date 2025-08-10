@@ -25,6 +25,15 @@ func Int32ToStringSlice(a []int32) []string {
 	return r
 }
 
+// Int64ToStringSlice
+func Int64ToStringSlice(a []int64) []string {
+	r := make([]string, len(a))
+	for k, v := range a {
+		r[k] = Int64ToString(v)
+	}
+	return r
+}
+
 // StringToInt32Slice
 func StringToInt32Slice(a []string) []int32 {
 	r := make([]int32, len(a))
