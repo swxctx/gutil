@@ -11,6 +11,12 @@ func StringToInt32(s string) int32 {
 	return int32(i)
 }
 
+// StringToInt64
+func StringToInt64(s string) int64 {
+	i, _ := strconv.ParseInt(s, 10, 64)
+	return i
+}
+
 // Int32ToString
 func Int32ToString(i int32) string {
 	return strconv.FormatInt(int64(i), 10)
